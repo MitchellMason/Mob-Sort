@@ -2,18 +2,30 @@ import $ from './jquery.js'
 import XLSX from './xlsx.mini.min'
 
 /**
- * A collection of helper methods to generate buttons, tables, and jumbotrons.
+ * A collection of helper methods to generate buttons, tables, and jumbotrons (oh my).
  */
 class UserInterfaceBuilder {
+    // Methods in this class can be considered static. No need to accept anything externally.
     constructor() {
     }
 
+    /**
+     * Creates the file upload button
+     * @param id{string} - The ID in the DOM
+     * @param onLoad{function} - The function to be called when data is uploaded by the user
+     * @return {*|jQuery|HTMLElement}
+     */
     makeButton = (id, onLoad) => {
         let button = $(`<input class='form-control' type='file' id='${id}' style="max-width: max-content">`)
         button.on('change', onLoad)
         return button;
     }
 
+    /**
+     * Creates the Nav Bar on the top of the page consisting of the application name and the upload field.
+     * @param onLoad{function} - the function to be executed when the "choose file" field is altered.
+     * @return {*|jQuery|HTMLElement}
+     */
     makeNavBar = (onLoad) => {
         let navbar = $('<nav class="navbar navbar-expand-lg" style="background-color: #6f42c1"></nav>')
         // The brand goes in the top left
@@ -213,7 +225,7 @@ class UserInterfaceBuilder {
         if(keys.length > 0){
             let table = $('<table class="table table-dark" style="width: max-content"></table>')
             let tbody = $('<tbody></tbody>')
-            for(const key in data){
+            for(const key of keys){
                 let row = $('<tr></tr>')
                 let keyCell = $(`<td>${key}</td>`)
                 let valueCell = $(`<td>${data[key]}</td>`)

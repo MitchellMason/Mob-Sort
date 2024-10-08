@@ -3,11 +3,20 @@ import $ from './js/jquery.js';
 import './css/bootstrap.css';
 import XLSX from './js/xlsx.mini.min'
 
+// the list of data uploaded by a spreadsheet and manipulated during sorting
 let dataToSort = null;
-let sortingComplete = false; // The flag that tells main() whether we need to make results or display them
+
+// The flag that tells main() whether we need to make results or display them
+let sortingComplete = false;
+
+// The instance of UserInterfaceBuilder used to build the Interface
 let uiHelper = new UserInterfaceBuilder();
+
+// total amount of sorting decisions made by the mob so far
 let totalDecisionMade = 0;
-let theoreticalMaxDecisions = -1;
+
+// The total amount of decisions that need to be made (initialized as null to show that this value is unknown for now)
+let theoreticalMaxDecisions = null;
 
 /**
  * Entry point for the application. Draws a prompt for data if there isn't any loaded. When there is a spreadsheet
@@ -48,6 +57,9 @@ let main = function(){
     }
 }
 
+/**
+ * Used after the data is loaded. Shows the user how the data will be presented on comparison cards.
+ */
 let confirmData = function(){
     let contentDiv = $('#content');
     contentDiv.empty();
@@ -55,6 +67,11 @@ let confirmData = function(){
     contentDiv.append(confirmationScreen);
 }
 
+/**
+ * Called once the `dataToSort` array is populated. Uses `mergeSort` to sort the array while feeding the
+ * `mobSortCompare` function to present the "mob" with the proper choice and information. After all necessary
+ * comparisons are made, the 'Mob Rank' key is added to the list of objects and returned in order.
+ */
 let mobSort = async function(){
     console.log('Mob Sort', dataToSort);
     let contentDiv = $('#content');
@@ -79,6 +96,14 @@ let mobSort = async function(){
     main();
 }
 
+/**
+ * Merge sort implementation adapted from StackOverflow. It is the standard implementation save for the addition of
+ * `await`. Permits the Mob Sort to conclude in fewer comparisons than quicksort (O(n ln n) verses O(n^2)).
+ * @param array{[]}
+ * @param fn{function(a,b): Promise<number>} - the async comparison function. Follows the same rules as javascripts native
+ * `.sort()` implementation, except that it returns a Promise which resolves to a `number`.
+ * @return {Promise<*>|[]}
+ */
 async function mergeSort(array, fn) {
     if (array.length <= 1) {
         return array;
@@ -176,6 +201,9 @@ let spreadsheetOnLoad = async function (event) {
     main();
 }
 
+/**
+ * A function which passes the *sorted* `dataToSort` to uiHelper.
+ */
 let showResults = function(){
     uiHelper.showResults(dataToSort)
 }
