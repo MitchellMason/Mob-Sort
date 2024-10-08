@@ -1,0 +1,27 @@
+{
+  "name": "mobsort-vanilla",
+  "version": "1.0.0",
+  "description": "Implements Quicksort where the comparison function prompts the user for the answer. Allows sorting for human-decidable items. ",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "author": "Mitchell Mason",
+  "license": "ISC",
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "html-inline-script-webpack-plugin": "^3.2.1",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.3",
+    "jquery": "3.6.0",
+    "sheetjs": "^2.0.0"
+  }
+}
