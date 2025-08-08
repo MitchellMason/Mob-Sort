@@ -1,6 +1,6 @@
 
 # About
-This project was built to enable a group of people to come together and argue about how a list of something should be ordered. Using [merge sort](https://en.wikipedia.org/wiki/Merge_sort), the audience will get their results with the minimum number of comparisons (O(n log n)). They should also avoid making the same decisions. 
+This project was built to enable a group of people to come together and argue about how a list of something should be ordered. Using [merge sort](https://en.wikipedia.org/wiki/Merge_sort), the audience will get their results with the minimum number of comparisons (O(n log n)). 
 
 # How to use
 Download the code base and use webpack to combine into a .html file. Mob Sort runs entirely on the front end, avoiding the need for servers by accepting uploaded Excel files (.xlsx). Generate a file in Excel or a FOSS alternative with the following format:
